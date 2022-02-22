@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import mapSurnameToName from "../components/utils";
 
-function SidebarTab({ name }) {
+function SidebarTab({ name, selected, changeSelectedTo }) {
   return (
-    <div className="bg-light p-3" style={{ cursor: "pointer" }}>
+    <div
+      className="bg-light p-3"
+      style={{ cursor: "pointer" }}
+      onClick={() => changeSelectedTo(name)}
+    >
       <img
         src={process.env.PUBLIC_URL + `/img/${name}.jpg`}
         style={{
