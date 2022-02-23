@@ -5,12 +5,15 @@ import { useEffect, useState } from "react";
 function App() {
   const [selected, setSelected] = useState();
   const names = ["lee", "yoon", "ahn", "shim", "heo"];
+
   const changeSelectedTo = (name) => {
     setSelected(name);
   };
+
   useEffect(() => {
     setSelected("lee");
   }, []);
+
   return (
     <div className="App">
       <div className="row">

@@ -1,7 +1,17 @@
-body {
-  height: 100%;
+@import url("https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap");
+
+* {
+  box-sizing: border-box;
 }
 
-.selected {
-  background-color: white;
+body {
+  font-family: "Do Hyeon", sans-serif;
+}
+
+.full-height {
+  height: 100vh;
+}
+
+.border_bottom {
+  border-bottom: 1px #808080 solid;
 }
