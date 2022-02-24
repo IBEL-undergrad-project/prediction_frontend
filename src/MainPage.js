@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import Utils from "./utils/utils";
 import "chart.js/auto";
 import { Doughnut /*getDatasetAtEvent*/ } from "react-chartjs-2";
 
+// temp data
 let data = {
   labels: ["이재명", "윤석열", "안철수", "심상정", "허경영"],
   datasets: [
@@ -15,12 +16,20 @@ let data = {
   ],
 };
 let options = {
-  responsive: false,
+  responsive: true,
+  maintainAspectRatio: false,
 };
 
 function MainPage({ selected }) {
+  const [betAmount, setBetAmount] = useState("");
   const putBet = () => {
     // interact with ether network
+  };
+  const onChange = (e) => {
+    setBetAmount(e.target.value);
+  };
+  const onSubmit = async (e) => {
+    e.preventDefault();
   };
 
   return (
@@ -41,15 +50,26 @@ function MainPage({ selected }) {
         {Utils.mapSurnameToName(selected)}
       </div>
       <div className="col d-flex justify-content-center mt-3">
-        <input type="text" placeholder="in ethers" />
-        <div className="btn btn-primary" onClick={putBet}>
-          베팅하기
-        </div>
+        <form onSubmit={onSubmit}>
+          <input
+            type="text"
+            placeholder="in ethers"
+            onChange={onChange}
+            value={betAmount}
+          />
+          <input
+            type="submit"
+            className="btn btn-primary"
+            value="베팅하기"
+          ></input>
+        </form>
       </div>
       <div className="d-flex justify-content-center mt-5">
         <Doughnut
           data={data}
           options={options}
+          width={300}
+          height={300}
           /*getDatasetAtEvent={Utils.getStatusDataFromEthereum}*/
         />
       </div>

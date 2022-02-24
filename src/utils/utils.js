@@ -19,6 +19,20 @@ class Utils {
   static getStatusDataFromEthereum = () => {
     return null;
   };
+
+  static connectWalletHandler = async () => {
+    if (window.ethereum) {
+      window.ethereum
+        .request({ method: "eth_requestAccounts" })
+        .then((result) => {
+          return result;
+        });
+    } else {
+      window.alert(
+        "You don't have MetaMask.\nInstall MetaMask to use this service."
+      );
+    }
+  };
 }
 
 export default Utils;
