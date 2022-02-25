@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Utils from "./utils/utils";
 import "chart.js/auto";
-import { Doughnut /*getDatasetAtEvent*/ } from "react-chartjs-2";
+import { Doughnut } from "react-chartjs-2";
 
 // temp data
 let data = {
@@ -22,9 +22,6 @@ let options = {
 
 function MainPage({ selected }) {
   const [betAmount, setBetAmount] = useState("");
-  const putBet = () => {
-    // interact with ether network
-  };
   const onChange = (e) => {
     setBetAmount(e.target.value);
   };
@@ -65,13 +62,7 @@ function MainPage({ selected }) {
         </form>
       </div>
       <div className="d-flex justify-content-center mt-5">
-        <Doughnut
-          data={data}
-          options={options}
-          width={300}
-          height={300}
-          /*getDatasetAtEvent={Utils.getStatusDataFromEthereum}*/
-        />
+        <Doughnut data={data} options={options} width={300} height={300} />
       </div>
     </div>
   );

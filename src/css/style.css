@@ -15,3 +15,13 @@ body {
 .border_bottom {
   border-bottom: 1px #808080 solid;
 }
+
+.fixed {
+  position: fixed;
+  bottom: 2vh;
+  right: 2vh;
+}
+
+.pointer {
+  cursor: pointer;
+}
