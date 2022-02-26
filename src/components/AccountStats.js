@@ -3,7 +3,7 @@ import Utils from "../utils/utils";
 
 function AccountStats({ provider, contract, signer }) {
   const [address, setAddress] = useState();
-  const [balance, setBalance] = useState();
+  const [balance, setBalance] = useState(-1);
   const [lee, setLee] = useState();
   const [yoon, setYoon] = useState();
   const [ahn, setAhn] = useState();
@@ -38,9 +38,11 @@ function AccountStats({ provider, contract, signer }) {
         <h3>내 Ropsten 지갑 주소</h3>
         <p>
           <b>{address} </b>
-          <i>{`(잔액: ${
-            Math.floor(parseFloat(Utils.parseWei(balance)) * 100) / 100
-          }Ether)`}</i>
+          {balance === -1 ? null : (
+            <i>{`(잔액: ${
+              Math.floor(parseFloat(Utils.parseWei(balance)) * 100) / 100
+            }Ether)`}</i>
+          )}
         </p>
       </div>
       <hr />
