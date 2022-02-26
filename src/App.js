@@ -31,9 +31,9 @@ function App() {
     );
 
     /* console.log(
-      contract.placeBet(1, {
+      contract.placeBet(0, {
         from: signer.getAddress(),
-        value: ethers.utils.parseEther("0.1"),
+        value: Utils.parseEther("0.1"),
       })
     ); */
   };
@@ -49,7 +49,6 @@ function App() {
     Utils.configureEthereumConnection().then((etherObj) =>
       setEtherObjStates(etherObj)
     );
-    testCode();
   }, []);
 
   return (
@@ -66,7 +65,8 @@ function App() {
           <MainPage selected={selected} signer={signer} />
         </div>
       </div>
-      <FloatingMenu provider={provider} contract={contract} />
+      <FloatingMenu provider={provider} contract={contract} signer={signer} />
+      <button onClick={testCode}>TEST</button>
     </div>
   );
 }

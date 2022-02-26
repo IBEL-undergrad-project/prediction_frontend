@@ -156,17 +156,30 @@ const contractAbi = [
 ];
 
 class Utils {
+  static SIDE = {
+    LEE: 0,
+    YOON: 1,
+    AHN: 2,
+    SHIM: 3,
+    HEO: 4,
+  };
+
   static mapSurnameToName = (name) => {
     switch (name) {
       case "lee":
+      case this.SIDE.LEE:
         return "이재명";
       case "yoon":
+      case this.SIDE.YOON:
         return "윤석열";
       case "ahn":
+      case this.SIDE.AHN:
         return "안철수";
       case "shim":
+      case this.SIDE.SHIM:
         return "심상정";
       case "heo":
+      case this.SIDE.HEO:
         return "허경영";
       default:
         return null;
@@ -203,6 +216,10 @@ class Utils {
       signer: signer,
       contract: contract,
     };
+  };
+
+  static parseEther = (ether) => {
+    return ethers.utils.parseEther(ether);
   };
 }
 
