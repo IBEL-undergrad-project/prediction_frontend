@@ -16,20 +16,6 @@ function App() {
     setSelected(name);
   };
 
-  const testCode = async () => {
-    provider
-      .send("eth_requestAccounts", [])
-      .then((result) => {
-        console.log(result[0]);
-        console.log("Wallet now connected");
-      })
-      .catch((error) => console.log(error));
-
-    console.log(
-      contract.bets(1).then((result) => console.log(result.toString()))
-    );
-  };
-
   const setEtherObjStates = async (etherObj) => {
     setProvider(etherObj.provider);
     setSigner(etherObj.signer);
@@ -58,7 +44,6 @@ function App() {
         </div>
       </div>
       <FloatingMenu provider={provider} contract={contract} signer={signer} />
-      <button onClick={testCode}>TEST</button>
     </div>
   );
 }
