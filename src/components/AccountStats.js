@@ -2,46 +2,65 @@ import React, { useEffect, useState } from "react";
 import Utils from "../utils/utils";
 
 function AccountStats({ provider, contract, signer }) {
-  const [accountAddress, setAccountAddress] = useState();
-  const [accountBettingInfo, setAccountBettingInfo] = useState([]);
-
-  const configureAccountInfo = () => {
-    signer.getAddress().then((address) => {
-      setAccountAddress(address);
-      getAccountInfo(address);
-    });
-  };
-
-  const getAccountInfo = (address) => {
-    const arr = [
-      Utils.SIDE.LEE,
-      Utils.SIDE.YOON,
-      Utils.SIDE.AHN,
-      Utils.SIDE.SHIM,
-      Utils.SIDE.HEO,
-    ];
-    const temp = new Array(0);
-    arr.forEach((item) => {
-      contract
-        .betsPerGambler(accountAddress, item)
-        .then((result) => temp.push(result.toString()));
-    });
-    setAccountBettingInfo(temp);
-  };
+  const [address, setAddress] = useState();
+  const [balance, setBalance] = useState();
+  const [lee, setLee] = useState();
+  const [yoon, setYoon] = useState();
+  const [ahn, setAhn] = useState();
+  const [shim, setShim] = useState();
+  const [heo, setHeo] = useState();
 
   useEffect(() => {
-    configureAccountInfo();
-  }, []);
+    signer.getAddress().then((addr) => {
+      setAddress(addr);
+      contract.betsPerGambler(addr, Utils.SIDE.LEE).then((result) => {
+        setLee(Utils.parseWei(result.toString()));
+      });
+      contract.betsPerGambler(addr, Utils.SIDE.YOON).then((result) => {
+        setYoon(Utils.parseWei(result.toString()));
+      });
+      contract.betsPerGambler(addr, Utils.SIDE.AHN).then((result) => {
+        setAhn(Utils.parseWei(result.toString()));
+      });
+      contract.betsPerGambler(addr, Utils.SIDE.SHIM).then((result) => {
+        setShim(Utils.parseWei(result.toString()));
+      });
+      contract.betsPerGambler(addr, Utils.SIDE.HEO).then((result) => {
+        setHeo(Utils.parseWei(result.toString()));
+      });
+    });
+    signer.getBalance().then((bal) => setBalance(bal));
+  }, [signer, contract]);
 
   return provider.network.chainId === 3 ? (
     <div>
       <div>
-        <h4>내 Ropsten 지갑 주소</h4>
-        <p>{accountAddress}</p>
+        <h3>내 Ropsten 지갑 주소</h3>
+        <p>
+          <b>{address} </b>
+          <i>{`(잔액: ${
+            Math.floor(parseFloat(Utils.parseWei(balance)) * 100) / 100
+          }Ether)`}</i>
+        </p>
       </div>
+      <hr />
       <div>
-        <h4>내 베팅 현황</h4>
-        <p>{accountBettingInfo}</p>
+        <h3>나의 각 후보 베팅 현황</h3>
+        <p>
+          <b>이재명 후보</b>: <b className="text-danger">{lee}</b>Ether
+        </p>
+        <p>
+          <b>윤석열 후보</b>: <b className="text-danger">{yoon}</b>Ether
+        </p>
+        <p>
+          <b>안철수 후보</b>: <b className="text-danger">{ahn}</b>Ether
+        </p>
+        <p>
+          <b>심상정 후보</b>: <b className="text-danger">{shim}</b>Ether
+        </p>
+        <p>
+          <b>허경영 후보</b>: <b className="text-danger">{heo}</b>Ether
+        </p>
       </div>
     </div>
   ) : (
@@ -53,3 +72,14 @@ function AccountStats({ provider, contract, signer }) {
 }
 
 export default AccountStats;
+
+/* {bettingStatus === null
+  ? null
+  : Utils.SIDEenumerator().map((side) => {
+      return (
+        <p key={side}>
+          {Utils.mapSurnameToName(side)}에게 베팅한 금액:{" "}
+          {bettingStatus[side]} 이더
+        </p>
+      );
+    })} */

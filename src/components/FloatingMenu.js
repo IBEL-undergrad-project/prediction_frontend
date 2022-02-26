@@ -17,7 +17,7 @@ function FloatingMenu({ provider, contract, signer }) {
     showBool: showAccountStats,
     handleCloseFunc: handleAccountClose,
     handleShow: handleAccountShow,
-    title: "Check Account Status",
+    title: "Check My Betting Status",
     body: (
       <AccountStats provider={provider} contract={contract} signer={signer} />
     ),
@@ -38,7 +38,7 @@ function FloatingMenu({ provider, contract, signer }) {
           className="inline-block bg-info p-2 border border-dark"
           onClick={handleAccountShow}
         >
-          Check Account Status
+          Check My Betting Status
         </div>
         <div
           className="inline-block bg-info p-2 border border-dark"

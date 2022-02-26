@@ -164,6 +164,16 @@ class Utils {
     HEO: 4,
   };
 
+  static SIDEenumerator = () => {
+    return [
+      this.SIDE.LEE,
+      this.SIDE.YOON,
+      this.SIDE.AHN,
+      this.SIDE.SHIM,
+      this.SIDE.HEO,
+    ];
+  };
+
   static mapSurnameToName = (name) => {
     switch (name) {
       case "lee":
@@ -237,6 +247,10 @@ class Utils {
 
   static parseEther = (ether) => {
     return ethers.utils.parseEther(ether);
+  };
+
+  static parseWei = (wei) => {
+    return ethers.utils.formatEther(wei);
   };
 }
 

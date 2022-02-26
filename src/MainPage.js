@@ -23,7 +23,7 @@ let options = {
 function MainPage({ selected, signer, contract }) {
   const [betAmount, setBetAmount] = useState("");
 
-  const num_regex = /^[0-9\.]+$/;
+  const num_regex = /^[0-9.]+$/;
 
   const onChange = (e) => {
     if (num_regex.test(e.target.value)) setBetAmount(e.target.value);

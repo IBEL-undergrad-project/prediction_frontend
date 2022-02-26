@@ -17,8 +17,7 @@ function App() {
   };
 
   const testCode = async () => {
-    // test code
-    await provider
+    provider
       .send("eth_requestAccounts", [])
       .then((result) => {
         console.log(result[0]);
@@ -29,13 +28,6 @@ function App() {
     console.log(
       contract.bets(1).then((result) => console.log(result.toString()))
     );
-
-    /* console.log(
-      contract.placeBet(0, {
-        from: signer.getAddress(),
-        value: Utils.parseEther("0.1"),
-      })
-    ); */
   };
 
   const setEtherObjStates = async (etherObj) => {
