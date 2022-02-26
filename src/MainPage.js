@@ -20,13 +20,40 @@ let options = {
   maintainAspectRatio: false,
 };
 
-function MainPage({ selected }) {
+function MainPage({ selected, signer, contract }) {
   const [betAmount, setBetAmount] = useState("");
+
+  const num_regex = /^[0-9\.]+$/;
+
   const onChange = (e) => {
-    setBetAmount(e.target.value);
+    if (num_regex.test(e.target.value)) setBetAmount(e.target.value);
   };
   const onSubmit = async (e) => {
     e.preventDefault();
+    const amount = e.target.amount.value;
+
+    if (amount === "") {
+      return;
+    }
+
+    if (parseFloat(amount) <= 0) {
+      window.alert("베팅액은 0보다 많아야 합니다.");
+      return;
+    }
+
+    if (
+      window.confirm(
+        Utils.mapSurnameToName(selected) +
+          " 후보에게 " +
+          amount +
+          "이더만큼 베팅하시겠습니까?"
+      )
+    ) {
+      contract.placeBet(Utils.mapSurnameToSIDE(selected), {
+        from: signer.getAddress(),
+        value: Utils.parseEther(amount),
+      });
+    }
   };
 
   return (
@@ -50,6 +77,7 @@ function MainPage({ selected }) {
         <form onSubmit={onSubmit}>
           <input
             type="text"
+            name="amount"
             placeholder="in ethers"
             onChange={onChange}
             value={betAmount}

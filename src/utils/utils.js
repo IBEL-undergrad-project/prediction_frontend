@@ -186,6 +186,23 @@ class Utils {
     }
   };
 
+  static mapSurnameToSIDE = (surname) => {
+    switch (surname) {
+      case "lee":
+        return this.SIDE.LEE;
+      case "yoon":
+        return this.SIDE.YOON;
+      case "ahn":
+        return this.SIDE.AHN;
+      case "shim":
+        return this.SIDE.SHIM;
+      case "heo":
+        return this.SIDE.HEO;
+      default:
+        return null;
+    }
+  };
+
   static connectWalletHandler = async () => {
     if (window.ethereum) {
       window.ethereum

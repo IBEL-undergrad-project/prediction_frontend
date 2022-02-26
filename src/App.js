@@ -62,7 +62,7 @@ function App() {
           />
         </div>
         <div className="col-8">
-          <MainPage selected={selected} signer={signer} />
+          <MainPage selected={selected} signer={signer} contract={contract} />
         </div>
       </div>
       <FloatingMenu provider={provider} contract={contract} signer={signer} />
