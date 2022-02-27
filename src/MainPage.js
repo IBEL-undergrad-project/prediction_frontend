@@ -1,10 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Utils from "./utils/utils";
 import "chart.js/auto";
-import BettingPieChart from "./components/BettingPieChart";
+import { Doughnut } from "react-chartjs-2";
 
 function MainPage({ selected, signer, contract }) {
   const [betAmount, setBetAmount] = useState("");
+  const [stats, setStats] = useState([1, 1, 1, 1, 1]);
+  const [chartData, setChartData] = useState(Utils.wrapChartData());
+  const [allocRatio, setAllocRatio] = useState([
+    { key: 0, ratio: 1 },
+    { key: 1, ratio: 1 },
+    { key: 2, ratio: 1 },
+    { key: 3, ratio: 1 },
+    { key: 4, ratio: 1 },
+  ]);
+
+  const options = {
+    responsive: true,
+    maintainAspectRatio: false,
+  };
+
+  const updateChart = (contract) => {
+    Utils.updateData(contract)
+      .then((stats) => {
+        console.log("컨트랙트 로딩 완료!");
+        setStats(stats);
+      })
+      .catch(() => console.log("컨트랙트가 아직 로딩되지 않았습니다"));
+  };
+
+  useEffect(() => {
+    updateChart(contract);
+  }, [contract]);
+
+  useEffect(() => {
+    setChartData(Utils.wrapChartData(stats));
+    setAllocRatio(Utils.getAllocRatio(stats));
+  }, [stats]);
 
   const num_regex = /^[0-9.]+$/;
 
@@ -77,7 +109,16 @@ function MainPage({ selected, signer, contract }) {
       <hr className="mt-4" />
       <div className="d-flex justify-content-center mt-2 font15em">배당율</div>
       <div className="d-flex justify-content-center mt-2">
-        <BettingPieChart contract={contract} />
+        <div style={{ height: "15em", width: "15em" }}>
+          <Doughnut data={chartData} options={options} />
+        </div>
+        <div className="row align-items-center" style={{ width: "150px" }}>
+          {allocRatio.map((item) => (
+            <div key={item.key}>
+              {Utils.mapSurnameToName(item.key)} {item.ratio}배
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
