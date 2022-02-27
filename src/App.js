@@ -9,6 +9,7 @@ function App() {
   const [provider, setProvider] = useState();
   const [signer, setSigner] = useState();
   const [contract, setContract] = useState();
+  const [endDate, setEndDate] = useState(Date.now());
 
   const names = ["lee", "yoon", "ahn", "shim", "heo"];
 
@@ -22,12 +23,22 @@ function App() {
     setContract(etherObj.contract);
   };
 
+  const setBettingEndDate = (contract) => {
+    Utils.getBettingEndDate(contract)
+      .then((date) => setEndDate(date))
+      .catch((err) => console.log("컨트랙트가 아직 로딩되지 않았습니다."));
+  };
+
   useEffect(() => {
     setSelected("lee");
     Utils.configureEthereumConnection().then((etherObj) =>
       setEtherObjStates(etherObj)
     );
   }, []);
+
+  useEffect(() => {
+    setBettingEndDate(contract);
+  }, [contract]);
 
   return (
     <div className="App">
@@ -43,7 +54,12 @@ function App() {
           <MainPage selected={selected} signer={signer} contract={contract} />
         </div>
       </div>
-      <FloatingMenu provider={provider} contract={contract} signer={signer} />
+      <FloatingMenu
+        provider={provider}
+        contract={contract}
+        signer={signer}
+        endDate={endDate}
+      />
     </div>
   );
 }

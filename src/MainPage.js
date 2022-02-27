@@ -19,6 +19,7 @@ function MainPage({ selected, signer, contract }) {
     responsive: true,
     maintainAspectRatio: false,
   };
+  const num_regex = /^[0-9.]+$/;
 
   const updateChart = (contract) => {
     Utils.updateData(contract)
@@ -37,8 +38,6 @@ function MainPage({ selected, signer, contract }) {
     setChartData(Utils.wrapChartData(stats));
     setAllocRatio(Utils.getAllocRatio(stats));
   }, [stats]);
-
-  const num_regex = /^[0-9.]+$/;
 
   const onChange = (e) => {
     if (num_regex.test(e.target.value)) setBetAmount(e.target.value);
@@ -64,10 +63,14 @@ function MainPage({ selected, signer, contract }) {
           "이더만큼 베팅하시겠습니까?"
       )
     ) {
-      contract.placeBet(Utils.mapSurnameToSIDE(selected), {
-        from: signer.getAddress(),
-        value: Utils.parseEther(amount),
-      });
+      contract
+        .placeBet(Utils.mapSurnameToSIDE(selected), {
+          from: signer.getAddress(),
+          value: Utils.parseEther(amount),
+        })
+        .then((transactionResponse) => {
+          transactionResponse.wait().then((receipt) => updateChart(contract));
+        });
     }
 
     setBetAmount("");

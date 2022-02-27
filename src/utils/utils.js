@@ -1,6 +1,6 @@
 import { ethers } from "ethers";
 
-const contractAddress = "0x11734780505Ef9FadF27fF2119d16178C8433A7f";
+const contractAddress = "0xc9C31cc9a575fe62C57897BA20a46C44f94Eae16";
 const contractAbi = [
   {
     inputs: [
@@ -12,6 +12,11 @@ const contractAbi = [
       {
         internalType: "uint256",
         name: "_commissionPercentage",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "_placeBetEndDate",
         type: "uint256",
       },
     ],
@@ -99,6 +104,20 @@ const contractAbi = [
         internalType: "address",
         name: "",
         type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+    constant: true,
+  },
+  {
+    inputs: [],
+    name: "placeBetEndDate",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
       },
     ],
     stateMutability: "view",
@@ -297,6 +316,12 @@ class Utils {
     return this.SIDEenumerator().map((iterator) => {
       return { key: iterator, ratio: tempArr[iterator] };
     });
+  };
+
+  static getBettingEndDate = async (contract) => {
+    let date = new Date((await contract.placeBetEndDate()) * 1000);
+
+    return date;
   };
 }
 

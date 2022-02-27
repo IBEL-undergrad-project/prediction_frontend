@@ -3,7 +3,7 @@ import About from "./About";
 import AccountStats from "./AccountStats";
 import ModalTemplate from "./ModalTemplate";
 
-function FloatingMenu({ provider, contract, signer }) {
+function FloatingMenu({ provider, contract, signer, endDate }) {
   const [showAccountStats, setShowAccountStats] = useState(false);
   const [showAbout, setShowAbout] = useState(false);
 
@@ -28,7 +28,7 @@ function FloatingMenu({ provider, contract, signer }) {
     handleCloseFunc: handleAboutClose,
     handleShow: handleAboutShow,
     title: "About This Project",
-    body: <About contract={contract} />,
+    body: <About contract={contract} endDate={endDate} />,
   };
 
   return (
