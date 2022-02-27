@@ -9,7 +9,10 @@ function About({ contract, endDate }) {
           2022년 대선 후보 중 최종 당선자를 예측하는 예측 시장 프로젝트입니다.
           최종 당선자를 맞춘 사람은 승리하며 총 상금의 일부분을 가져가게 됩니다.
         </p>
-        <p>베팅 가능 기한은 {endDate.toString()}까지 입니다.</p>
+        <p>
+          베팅 가능 기한은
+          <span className="text-danger"> {endDate.toString()}</span>까지 입니다.
+        </p>
       </div>
       <hr />
       <div>
@@ -54,7 +57,9 @@ function About({ contract, endDate }) {
           접속하셔서 밑에 있는 컨트랙트 주소로 검색하시면 체인에 배포된 코드를
           투명하게 보실 수 있습니다.
         </p>
-        <p>컨트랙트 주소: {contract.address}</p>
+        <p>
+          컨트랙트 주소: {contract !== undefined ? contract.address : "로딩 중"}
+        </p>
       </div>
     </div>
   );

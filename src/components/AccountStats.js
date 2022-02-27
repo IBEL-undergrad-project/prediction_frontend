@@ -74,14 +74,3 @@ function AccountStats({ provider, contract, signer }) {
 }
 
 export default AccountStats;
-
-/* {bettingStatus === null
-  ? null
-  : Utils.SIDEenumerator().map((side) => {
-      return (
-        <p key={side}>
-          {Utils.mapSurnameToName(side)}에게 베팅한 금액:{" "}
-          {bettingStatus[side]} 이더
-        </p>
-      );
-    })} */

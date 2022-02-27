@@ -111,7 +111,7 @@ function MainPage({ selected, signer, contract }) {
       </div>
       <hr className="mt-4" />
       <div className="d-flex justify-content-center mt-2 font15em">배당율</div>
-      <div className="d-flex justify-content-center mt-2">
+      <div className="d-flex justify-content-center mt-4">
         <div style={{ height: "15em", width: "15em" }}>
           <Doughnut data={chartData} options={options} />
         </div>
