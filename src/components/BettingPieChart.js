@@ -5,7 +5,13 @@ import Utils from "../utils/utils";
 function BettingPieChart({ contract }) {
   const [stats, setStats] = useState([1, 1, 1, 1, 1]);
   const [chartData, setChartData] = useState(Utils.wrapChartData());
-  const [allocRatio, setAllocRatio] = useState([1, 1, 1, 1, 1]);
+  const [allocRatio, setAllocRatio] = useState([
+    { key: 0, ratio: 1 },
+    { key: 1, ratio: 1 },
+    { key: 2, ratio: 1 },
+    { key: 3, ratio: 1 },
+    { key: 4, ratio: 1 },
+  ]);
 
   const options = {
     responsive: true,
@@ -31,9 +37,11 @@ function BettingPieChart({ contract }) {
       <div style={{ height: "10em", height: "10em" }}>
         <Doughnut data={chartData} options={options} />
       </div>
-      <div className="row align-items-center" style={{ width: "100px" }}>
+      <div className="row align-items-center" style={{ width: "150px" }}>
         {allocRatio.map((item) => (
-          <div>{item}배</div>
+          <div key={item.key}>
+            {Utils.mapSurnameToName(item.key)} {item.ratio}배
+          </div>
         ))}
       </div>
     </>

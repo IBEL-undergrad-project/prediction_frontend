@@ -291,9 +291,12 @@ class Utils {
   };
 
   static getAllocRatio = (stats) => {
-    const tempArr = stats;
     const total = stats.map((item) => parseFloat(item)).reduce((a, b) => a + b);
-    return tempArr.map((item) => Math.floor((total / item) * 100) / 100);
+    const tempArr = stats.map((item) => Math.floor((total / item) * 100) / 100);
+
+    return this.SIDEenumerator().map((iterator) => {
+      return { key: iterator, ratio: tempArr[iterator] };
+    });
   };
 }
 

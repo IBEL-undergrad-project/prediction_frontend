@@ -55,7 +55,7 @@ function MainPage({ selected, signer, contract }) {
           alt={selected}
         />
       </div>
-      <div className="d-flex justify-content-center mt-2 font4vh">
+      <div className="d-flex justify-content-center mt-2 font15em">
         {Utils.mapSurnameToName(selected)}
       </div>
       <div className="col d-flex justify-content-center mt-3">
@@ -75,7 +75,7 @@ function MainPage({ selected, signer, contract }) {
         </form>
       </div>
       <hr className="mt-4" />
-      <div className="d-flex justify-content-center mt-2 font4vh">배당율</div>
+      <div className="d-flex justify-content-center mt-2 font15em">배당율</div>
       <div className="d-flex justify-content-center mt-2">
         <BettingPieChart contract={contract} />
       </div>
