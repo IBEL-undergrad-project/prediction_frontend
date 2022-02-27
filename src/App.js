@@ -31,7 +31,7 @@ function App() {
 
   return (
     <div className="App">
-      <div className="row">
+      <div className="row full-height full-width">
         <div className="col-4">
           <Sidebar
             names={names}
