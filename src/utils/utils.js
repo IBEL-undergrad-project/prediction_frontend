@@ -265,7 +265,7 @@ class Utils {
     const tempArr = [];
     for (let i = 0; i < this.SIDEenumerator().length; i++) {
       const result = await contract.bets(i);
-      tempArr.push(result.toString());
+      tempArr.push(this.parseWei(result));
     }
     return tempArr;
   };
@@ -288,6 +288,12 @@ class Utils {
         },
       ],
     };
+  };
+
+  static getAllocRatio = (stats) => {
+    const tempArr = stats;
+    const total = stats.map((item) => parseFloat(item)).reduce((a, b) => a + b);
+    return tempArr.map((item) => Math.floor((total / item) * 100) / 100);
   };
 }
 

@@ -47,8 +47,8 @@ function MainPage({ selected, signer, contract }) {
         <img
           src={process.env.PUBLIC_URL + `/img/${selected}.jpg`}
           style={{
-            height: "35vh",
-            width: "35vh",
+            height: "10em",
+            width: "10em",
             borderRadius: "5%",
             marginRight: "1em",
           }}
@@ -74,7 +74,9 @@ function MainPage({ selected, signer, contract }) {
           ></input>
         </form>
       </div>
-      <div className="d-flex justify-content-center mt-5">
+      <hr className="mt-4" />
+      <div className="d-flex justify-content-center mt-2 font4vh">배당율</div>
+      <div className="d-flex justify-content-center mt-2">
         <BettingPieChart contract={contract} />
       </div>
     </div>
