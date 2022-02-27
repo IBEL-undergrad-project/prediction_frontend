@@ -1,24 +1,7 @@
 import React, { useState } from "react";
 import Utils from "./utils/utils";
 import "chart.js/auto";
-import { Doughnut } from "react-chartjs-2";
-
-// temp data
-let data = {
-  labels: ["이재명", "윤석열", "안철수", "심상정", "허경영"],
-  datasets: [
-    {
-      label: "My First Dataset",
-      data: [140, 120, 100, 75, 10],
-      backgroundColor: ["#4FC1E8", "#ED5564", "#A0D568", "#FFCE54", "#AC92EB"],
-      hoverOffset: 4,
-    },
-  ],
-};
-let options = {
-  responsive: true,
-  maintainAspectRatio: false,
-};
+import BettingPieChart from "./components/BettingPieChart";
 
 function MainPage({ selected, signer, contract }) {
   const [betAmount, setBetAmount] = useState("");
@@ -54,6 +37,8 @@ function MainPage({ selected, signer, contract }) {
         value: Utils.parseEther(amount),
       });
     }
+
+    setBetAmount("");
   };
 
   return (
@@ -90,7 +75,7 @@ function MainPage({ selected, signer, contract }) {
         </form>
       </div>
       <div className="d-flex justify-content-center mt-5">
-        <Doughnut data={data} options={options} width={300} height={300} />
+        <BettingPieChart contract={contract} />
       </div>
     </div>
   );
