@@ -16,7 +16,7 @@ function App() {
     setSelected(name);
   };
 
-  const setEtherObjStates = async (etherObj) => {
+  const setEtherObjStates = (etherObj) => {
     setProvider(etherObj.provider);
     setSigner(etherObj.signer);
     setContract(etherObj.contract);

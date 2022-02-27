@@ -228,14 +228,21 @@ class Utils {
   };
 
   static configureEthereumConnection = async () => {
-    while (window.ethereum == null) {
+    if (window.ethereum == null) {
       window.alert(
         "You need to have MetaMask installed\nInstall MetaMask and refresh this page"
       );
+      return;
     }
 
     const provider = new ethers.providers.Web3Provider(window.ethereum);
-    await provider.send("eth_requestAccounts", []);
+    await provider.send("eth_requestAccounts", []).catch((err) => {
+      if (err.code === -32002) {
+        window.alert(
+          "메타마스크에 연결이 되지 않았습니다.\n메타마스크에 연결되어있지 않으면 서비스를 이용하실 수 없으니 연결 여부를 꼭 확인해주세요."
+        );
+      }
+    });
     const signer = provider.getSigner();
     const contract = new ethers.Contract(contractAddress, contractAbi, signer);
 
@@ -244,6 +251,10 @@ class Utils {
       signer: signer,
       contract: contract,
     };
+  };
+
+  static preventLoadingError = () => {
+    console.log("1");
   };
 
   static parseEther = (ether) => {
