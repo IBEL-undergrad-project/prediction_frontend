@@ -253,16 +253,41 @@ class Utils {
     };
   };
 
-  static preventLoadingError = () => {
-    console.log("1");
-  };
-
   static parseEther = (ether) => {
     return ethers.utils.parseEther(ether);
   };
 
   static parseWei = (wei) => {
     return ethers.utils.formatEther(wei);
+  };
+
+  static updateData = async (contract) => {
+    const tempArr = [];
+    for (let i = 0; i < this.SIDEenumerator().length; i++) {
+      const result = await contract.bets(i);
+      tempArr.push(result.toString());
+    }
+    return tempArr;
+  };
+
+  static wrapChartData = (data = [1, 1, 1, 1, 1]) => {
+    return {
+      labels: ["이재명", "윤석열", "안철수", "심상정", "허경영"],
+      datasets: [
+        {
+          label: "My First Dataset",
+          data: data,
+          backgroundColor: [
+            "#4FC1E8",
+            "#ED5564",
+            "#A0D568",
+            "#FFCE54",
+            "#AC92EB",
+          ],
+          hoverOffset: 4,
+        },
+      ],
+    };
   };
 }
 

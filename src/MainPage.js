@@ -47,15 +47,15 @@ function MainPage({ selected, signer, contract }) {
         <img
           src={process.env.PUBLIC_URL + `/img/${selected}.jpg`}
           style={{
-            height: "8em",
-            width: "8em",
+            height: "35vh",
+            width: "35vh",
             borderRadius: "5%",
             marginRight: "1em",
           }}
           alt={selected}
         />
       </div>
-      <div className="d-flex justify-content-center mt-2">
+      <div className="d-flex justify-content-center mt-2 font4vh">
         {Utils.mapSurnameToName(selected)}
       </div>
       <div className="col d-flex justify-content-center mt-3">
