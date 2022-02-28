@@ -13,6 +13,18 @@ function About({ contract, endDate }) {
           베팅 가능 기한은
           <span className="text-danger"> {endDate.toString()}</span>까지 입니다.
         </p>
+        <p>
+          <b>상금 수령 가능 조건</b>은 다음과 같습니다:
+        </p>
+        <p>1. 당선된 후보에게 0보다 많은 이더를 베팅</p>
+        <p>2. 관리자(oracle)이 선거 결과를 컨트랙트에 보고한 이후</p>
+        <p>
+          선거 결과 보고 여부는{" "}
+          <span style={{ backgroundColor: "#0dcaf0" }}>
+            Check My Betting Status
+          </span>
+          에서 볼 수 있습니다.
+        </p>
       </div>
       <hr />
       <div>
