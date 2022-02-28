@@ -16,8 +16,8 @@ function ModalTemplate({ config }) {
         {config.body}
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="primary" onClick={config.handleCloseFunc}>
-          Got it!
+        <Button variant="secondary" onClick={config.handleCloseFunc}>
+          닫기
         </Button>
       </Modal.Footer>
     </Modal>
