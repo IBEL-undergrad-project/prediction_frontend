@@ -35,6 +35,10 @@ body {
   cursor: pointer;
 }
 
+.not-allowed {
+  cursor: not-allowed;
+}
+
 .font4vh {
   font-size: 4vh;
 }

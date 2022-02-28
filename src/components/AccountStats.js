@@ -9,6 +9,23 @@ function AccountStats({ provider, contract, signer }) {
   const [ahn, setAhn] = useState();
   const [shim, setShim] = useState();
   const [heo, setHeo] = useState();
+  const [canTake, setCanTake] = useState(false);
+
+  const takePrize = () => {
+    try {
+      contract
+        .withdrawGain()
+        .then((transactionResponse) =>
+          transactionResponse
+            .wait()
+            .then((receipt) => window.alert("transaction has been confirmed"))
+            .catch((err) => console.log(err))
+        )
+        .catch((err) => console.log(err));
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   useEffect(() => {
     signer.getAddress().then((addr) => {
@@ -30,12 +47,21 @@ function AccountStats({ provider, contract, signer }) {
       });
     });
     signer.getBalance().then((bal) => setBalance(bal));
+    try {
+      if (contract !== undefined) {
+        contract
+          .resultReported()
+          .then((resultReported) => setCanTake(resultReported));
+      }
+    } catch (err) {
+      console.log(err);
+    }
   }, [signer, contract]);
 
   return provider.network.chainId === 3 ? (
     <div>
       <div>
-        <h3>내 Ropsten 지갑 주소</h3>
+        <h3>나의 Ropsten 지갑 주소</h3>
         <p>
           <b>{address} </b>
           {balance === -1 ? null : (
@@ -64,6 +90,17 @@ function AccountStats({ provider, contract, signer }) {
           <b>허경영 후보</b>: <b className="text-danger">{heo}</b>Ether
         </p>
       </div>
+      <hr />
+      <h3>상금 수령하기</h3>
+      {canTake ? (
+        <button className="btn btn-primary" onClick={takePrize}>
+          수령하기
+        </button>
+      ) : (
+        <button className="btn btn-secondary">
+          아직 선거 결과가 입력되지 않았습니다
+        </button>
+      )}
     </div>
   ) : (
     <h1 className="text-danger">

@@ -69,7 +69,10 @@ function MainPage({ selected, signer, contract }) {
           value: Utils.parseEther(amount),
         })
         .then((transactionResponse) => {
-          transactionResponse.wait().then((receipt) => updateChart(contract));
+          transactionResponse.wait().then((receipt) => {
+            updateChart(contract);
+            window.alert("transaction has been confirmed");
+          });
         });
     }
 
