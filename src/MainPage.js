@@ -22,12 +22,9 @@ function MainPage({ selected, signer, contract }) {
   const num_regex = /^[0-9.]+$/;
 
   const updateChart = (contract) => {
-    Utils.updateData(contract)
-      .then((stats) => {
-        console.log("컨트랙트 로딩 완료!");
-        setStats(stats);
-      })
-      .catch(() => console.log("컨트랙트가 아직 로딩되지 않았습니다"));
+    Utils.updateData(contract).then((stats) => {
+      setStats(stats);
+    });
   };
 
   useEffect(() => {
