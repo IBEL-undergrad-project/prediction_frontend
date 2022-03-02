@@ -311,7 +311,7 @@ class Utils {
   };
 
   static getBettingEndDate = async (contract) => {
-    let date = new Date((await contract.ElectionStartDate()) * 1000);
+    let date = new Date((await contract.electionStartDate()) * 1000);
 
     return date;
   };
