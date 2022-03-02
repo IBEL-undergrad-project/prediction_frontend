@@ -11,7 +11,8 @@ function About({ contract, endDate }) {
         </p>
         <p>
           베팅 가능 기한은
-          <span className="text-danger"> {endDate.toString()}</span>까지 입니다.
+          <span className="text-danger"> {new Date(endDate).toString()}</span>
+          까지 입니다.
         </p>
         <p>
           <b>상금 수령 가능 조건</b>은 다음과 같습니다:

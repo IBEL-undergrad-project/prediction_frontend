@@ -26,7 +26,7 @@ function App() {
   const setBettingEndDate = (contract) => {
     Utils.getBettingEndDate(contract)
       .then((date) => setEndDate(date))
-      .catch((err) => console.log("컨트랙트가 아직 로딩되지 않았습니다."));
+      .catch((err) => console.log("waiting for the contract to load..."));
   };
 
   useEffect(() => {

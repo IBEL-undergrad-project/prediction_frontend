@@ -22,9 +22,11 @@ function MainPage({ selected, signer, contract }) {
   const num_regex = /^[0-9.]+$/;
 
   const updateChart = (contract) => {
-    Utils.updateData(contract).then((stats) => {
-      setStats(stats);
-    });
+    if (contract !== undefined) {
+      Utils.updateData(contract).then((stats) => {
+        setStats(stats);
+      });
+    }
   };
 
   useEffect(() => {
