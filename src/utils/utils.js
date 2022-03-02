@@ -1,55 +1,107 @@
 import { ethers } from "ethers";
 
-const contractAddress = "0x00cf9c00a743a82867cbcb00f5d5ca8ff4d23832";
+const contractAddress = "0x967f25c1525147eab29f1c0691e1a8167f30b439";
 const contractAbi = [
   {
     inputs: [
-      { internalType: "address", name: "_oracle", type: "address" },
+      {
+        internalType: "address",
+        name: "_oracle",
+        type: "address",
+      },
       {
         internalType: "uint256",
         name: "_commissionPercentage",
         type: "uint256",
       },
-      { internalType: "uint256", name: "_electionStartDate", type: "uint256" },
+      {
+        internalType: "uint256",
+        name: "_electionStartDate",
+        type: "uint256",
+      },
     ],
     stateMutability: "nonpayable",
     type: "constructor",
   },
   {
-    inputs: [{ internalType: "enum Prediction.Side", name: "", type: "uint8" }],
+    inputs: [
+      {
+        internalType: "enum Prediction.Side",
+        name: "",
+        type: "uint8",
+      },
+    ],
     name: "bets",
-    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
     stateMutability: "view",
     type: "function",
   },
   {
     inputs: [
-      { internalType: "address", name: "", type: "address" },
-      { internalType: "enum Prediction.Side", name: "", type: "uint8" },
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+      {
+        internalType: "enum Prediction.Side",
+        name: "",
+        type: "uint8",
+      },
     ],
     name: "betsPerGambler",
-    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
     stateMutability: "view",
     type: "function",
   },
   {
     inputs: [],
     name: "commissionPercentage",
-    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
     stateMutability: "view",
     type: "function",
   },
   {
     inputs: [],
     name: "electionStartDate",
-    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
     stateMutability: "view",
     type: "function",
   },
   {
     inputs: [],
     name: "oracle",
-    outputs: [{ internalType: "address", name: "", type: "address" }],
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
     stateMutability: "view",
     type: "function",
   },
@@ -57,7 +109,11 @@ const contractAbi = [
     inputs: [],
     name: "result",
     outputs: [
-      { internalType: "enum Prediction.Side", name: "", type: "uint8" },
+      {
+        internalType: "enum Prediction.Side",
+        name: "",
+        type: "uint8",
+      },
     ],
     stateMutability: "view",
     type: "function",
@@ -65,13 +121,23 @@ const contractAbi = [
   {
     inputs: [],
     name: "resultReported",
-    outputs: [{ internalType: "bool", name: "", type: "bool" }],
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
     stateMutability: "view",
     type: "function",
   },
   {
     inputs: [
-      { internalType: "enum Prediction.Side", name: "_side", type: "uint8" },
+      {
+        internalType: "enum Prediction.Side",
+        name: "_side",
+        type: "uint8",
+      },
     ],
     name: "placeBet",
     outputs: [],
@@ -87,7 +153,11 @@ const contractAbi = [
   },
   {
     inputs: [
-      { internalType: "enum Prediction.Side", name: "_winner", type: "uint8" },
+      {
+        internalType: "enum Prediction.Side",
+        name: "_winner",
+        type: "uint8",
+      },
     ],
     name: "reportResult",
     outputs: [],
@@ -241,7 +311,7 @@ class Utils {
   };
 
   static getBettingEndDate = async (contract) => {
-    let date = new Date((await contract.placeBetEndDate()) * 1000);
+    let date = new Date((await contract.ElectionStartDate()) * 1000);
 
     return date;
   };
